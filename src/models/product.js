@@ -1,7 +1,7 @@
-class Product {
+export default class Product {
   constructor() {
     console.log("Product module");
   }
 }
 
-export { Product }
+//export { Product }
