@@ -31,5 +31,9 @@
     "jest": "^24.1.0",
     "nodemon": "^1.18.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "collections": "^5.1.8",
+    "csvjson": "^5.1.0",
+    "csvtojson": "^2.0.8"
+  }
 }
