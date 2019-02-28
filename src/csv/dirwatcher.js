@@ -27,7 +27,7 @@ export default class DirWatcher extends EventEmitter {
         })
         .catch((error) => {
           console.log(error);
-          throw error;
+          throw new Error(error);
         });
 
         /*
