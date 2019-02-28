@@ -1,6 +1,5 @@
 import program from "commander"
 import readline from "readline"
-import reverseString from "reverse-string"
 import fs from "fs"
 import csv from "csvtojson"
 import Deque from "collections/deque";
@@ -12,7 +11,7 @@ const rl = readline.createInterface({
 
 function reverse() {
   rl.question("Please provide a string for reversing: ", (answer) => {
-    console.log(`Reversed: ${reverseString(answer)}`);
+    console.log(`Reversed: ${answer.split('').reverse().join('')}`);
     rl.close();
   });
 }
@@ -34,9 +33,9 @@ function outputFile(filePath) {
 function convertFromFile(filePath) {
   validateFilePath(filePath, 'convertFromFile');
   fs.createReadStream(filePath)
-  .on('error', handleFileReadError)
-  .pipe(csv())
-  .pipe(process.stdout);
+    .on('error', handleFileReadError)
+    .pipe(csv())
+    .pipe(process.stdout);
 }
 
 function convertToFile(filePath) {
@@ -61,10 +60,10 @@ function cssBundler(dirPath) {
     var cssFiles = new Deque(filesFromFS)
       .filter(file => file.endsWith('.css'))
       .filter(file => file !== 'bundle.css')
-      .map(fileName => {return dirPath + fileName;});
+      .map(fileName => dirPath + fileName);
     
     function startWritingNextStream() {
-      let currentCss = cssFiles.pop();
+      let currentCss = cssFiles.shift();
       if (currentCss) {
         console.log('Start writing next CSS into bundle: ', currentCss);
         fs.createReadStream(currentCss)
