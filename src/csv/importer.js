@@ -16,9 +16,13 @@ export default class Importer {
     return csv().fromFile(path);
   }
 
-  async importPseudoSync(path) {
-    return await csv().fromFile(path);;
-  }
+  // async importPseudoSync(path) {
+  //   return new Promise(resolve => resolve(csv().fromFile(path)));
+  // }
+
+  // async importPseudoSync(path) {
+  //   return await csv().fromFile(path);
+  // }
 
   importSync(path) {
     const data = fs.readFileSync(path, { encoding : 'utf8'});
