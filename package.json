@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "build": "babel src -d build",
-    "start": "nodemon --exec babel-node -- ./src/app.js",
+    "start": "npm run hw2",
+    "hw1": "nodemon --exec babel-node -- ./src/hw1.js",
+    "hw2": "nodemon --exec babel-node -- ./src/hw2.js",
     "start-another-way": "nodemon --exec npx babel src/app.js",
     "start-another-way-2": "npm run build && nodemon ./build/app.js",
     "start-another-way-3": "nodemon --watch src --exec \"npm run build && node ./build/app.js\""
