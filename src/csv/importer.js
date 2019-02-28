@@ -5,15 +5,10 @@ import fs from 'fs'
 export default class Importer {
   
   constructor(dirwatcher) {
-    dirwatcher.on("change", newFiles => {
-        newFiles
-            .filter(file => file.endsWith('.csv'))
-            .forEach(csvFile => {
-              this.import(csvFile)
-                .then(jsonData => console.log(`Imported file ${csvFile}: ${JSON.stringify(jsonData)}`));
-              
-              // console.log(`Imported file ${csvFile}: ${JSON.stringify(this.importSync(csvFile))}`)
-            });
+    dirwatcher.on("change", csvFile => {
+      this.import(csvFile)
+        .then(jsonData => console.log(`Imported file ${csvFile}: ${JSON.stringify(jsonData)}`));
+      // console.log(`Imported file ${csvFile}: ${JSON.stringify(this.importSync(csvFile))}`)
     });
   }
 
