@@ -1,5 +1,4 @@
 import http from "http"
-import { request } from "https";
 
 http.createServer()
   .on('request', (req, res) => {
