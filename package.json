@@ -11,6 +11,7 @@
     "hw2": "nodemon --exec babel-node -- ./src/hw2.js",
     "hw3": "babel-node ./src/utils/streams.js --help",
     "hw4": "nodemon --exec babel-node -- ./src/http-servers/plain-text-server.js",
+    "hw4webapp": "nodemon --exec babel-node -- ./webapp/index.js",
     "start-another-way": "nodemon --exec npx babel src/app.js",
     "start-another-way-2": "npm run build && nodemon ./build/app.js",
     "start-another-way-3": "nodemon --watch src --exec \"npm run build && node ./build/app.js\""
@@ -37,9 +38,12 @@
   },
   "dependencies": {
     "commander": "^2.19.0",
+    "cookie-parser": "^1.4.4",
     "csvjson": "^5.1.0",
     "csvtojson": "^2.0.8",
     "express": "^4.16.4",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "querystring": "^0.2.0",
+    "url": "^0.11.0"
   }
 }
