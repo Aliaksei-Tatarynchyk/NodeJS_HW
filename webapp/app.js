@@ -1,12 +1,13 @@
 import express from "express"
 import queryParser from "./middlewares/queryParser"
 import cookieParser from "./middlewares/cookieParser"
+import routes from "./routes";
 
 const app = express();
-const port = 8090;
 
-app.listen(port, () => console.log(`App listening on port ${port}`));
 app.use(cookieParser);
 app.use(queryParser);
+app.use(express.json());
+routes(app);
 
 export default app;

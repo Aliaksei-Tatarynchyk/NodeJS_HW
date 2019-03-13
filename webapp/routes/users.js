@@ -3,7 +3,7 @@ import { users } from "./../models/storage"
 
 const router = express.Router();
 
-router.get('/users', (req, res) => {
+router.get('/', (req, res) => {
   res.json(users);
 });
 
