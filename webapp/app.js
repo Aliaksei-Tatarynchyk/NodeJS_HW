@@ -1,7 +1,7 @@
 import express from "express"
 import queryParser from "./middlewares/queryParser"
 import cookieParser from "./middlewares/cookieParser"
-import routes from "./routes";
+import routes from "./routes"
 
 const app = express();
 

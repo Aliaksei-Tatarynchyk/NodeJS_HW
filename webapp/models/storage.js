@@ -9,11 +9,9 @@ const products = [{
 }];
 
 const users = [{
-  id: "usr001",
   login: "admin",
   email: "admin@gmail.com"
-},{
-  id: "usr002",
+}, {
   login: "fakeUser",
   email: "anon@zoo.com"
 }];

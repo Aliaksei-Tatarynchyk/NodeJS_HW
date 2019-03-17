@@ -1,7 +1,10 @@
 import express from "express"
 import { products, reviews } from "./../models/storage"
+import checkAuthToken from "./../middlewares/checkAuthToken"
 
 const router = express.Router();
+
+router.use(checkAuthToken);
 
 router.route('/')
   .get((req, res) => {

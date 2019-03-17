@@ -1,12 +1,11 @@
+import home from "./home"
 import products from "./products"
 import users from "./users"
+import auth from "./auth"
 
 export default function(app) {
-  app.use('/api/products', products); // GET and POST
-  app.use('/api/users', users); // GET
-  app.get('/', (req, res) => {
-    console.log("Cookies: ", req.parsedCookies);
-    console.log("Query: ", req.parsedQuery);
-    res.status(200).send("Hello");
-  });
+  app.use('/', home);
+  app.use('/api/products', products);
+  app.use('/api/users', users);
+  app.use('/api/auth', auth);
 }
