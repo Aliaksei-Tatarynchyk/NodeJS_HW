@@ -11,7 +11,7 @@
     "hw2": "nodemon --exec babel-node -- ./src/hw2.js",
     "hw3": "babel-node ./src/utils/streams.js --help",
     "hw4": "nodemon --exec babel-node -- ./src/http-servers/plain-text-server.js",
-    "hw4webapp": "nodemon --exec babel-node -- ./webapp/index.js",
+    "webapp": "nodemon --exec babel-node -- ./webapp/index.js",
     "start-another-way": "nodemon --exec npx babel src/app.js",
     "start-another-way-2": "npm run build && nodemon ./build/app.js",
     "start-another-way-3": "nodemon --watch src --exec \"npm run build && node ./build/app.js\""
@@ -42,6 +42,12 @@
     "csvjson": "^5.1.0",
     "csvtojson": "^2.0.8",
     "express": "^4.16.4",
-    "lodash": "^4.17.11"
+    "jsonwebtoken": "^8.5.0",
+    "lodash": "^4.17.11",
+    "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4"
   }
 }

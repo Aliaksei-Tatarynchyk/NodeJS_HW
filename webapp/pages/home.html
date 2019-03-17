@@ -1,0 +1,25 @@
+<html>
+  <head></head>
+  <body>
+    <h2>Home Page</h2>
+    <p>You have to login first in either of way to see the content:</p>
+    <ul>
+      <li>POST: /api/auth - body should be JSON with Login/Password pair, e.g. {
+          "username":"login",
+          "password": "password"
+        }</li>
+      <li>GET: <a href="/api/auth/google">Google</a></li>
+      <li>GET: <a href="/api/auth/facebook">Facebook</a></li>
+      <li>GET: <a href="/api/auth/twitter">Twitter</a></li>
+    </ul>
+    <p>
+      After this you will be able to call following endpoints using generated authentication token passed along with "x-access-token" header:
+    </p>
+    <ul>
+      <li>GET|POST: /api/products</li>
+      <li>GET: /api/products/:id</li>
+      <li>GET: /api/products/:id/reviews</li>
+      <li>GET: /api/users</li>
+    </ul>
+  </body>
+</html>
