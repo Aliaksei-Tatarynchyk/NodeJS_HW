@@ -12,6 +12,8 @@
     "hw3": "babel-node ./src/utils/streams.js --help",
     "hw4": "nodemon --exec babel-node -- ./src/http-servers/plain-text-server.js",
     "webapp": "nodemon --exec babel-node -- ./webapp/index.js",
+    "db-update": "npx sequelize db:migrate && npx sequelize db:seed:all",
+    "db-undo": "npx sequelize db:seed:undo:all && npx sequelize db:migrate:undo:all",
     "start-another-way": "nodemon --exec npx babel src/app.js",
     "start-another-way-2": "npm run build && nodemon ./build/app.js",
     "start-another-way-3": "nodemon --watch src --exec \"npm run build && node ./build/app.js\""
@@ -48,6 +50,9 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "pg": "^7.9.0",
+    "sequelize": "^5.1.0",
+    "sequelize-cli": "^5.4.0"
   }
 }

@@ -4,28 +4,31 @@ import LocalStrategy from "passport-local"
 import TwitterStrategy from "passport-twitter"
 import FacebookStrategy from "passport-facebook"
 import GoogleStrategy from "passport-google-oauth20"
-import { users } from "./../models/storage"
-import secretStorage, {auth as authStorage} from "./../models/secretStorage"
+import secretStorage from "./../models/secretStorage"
+import db from "./../models/storage"
 import jwt from "jsonwebtoken"
+
+const AuthInfo = db.import("./../models/authinfo");
+const User = db.import("./../models/user");
 
 const router = express.Router();
 
 function checkAuthentication(idProperty, idPropertyValue, password, done) {
-  let auth = authStorage.find((item) => item[idProperty] === idPropertyValue);
-
-  var user, authInfo;
-  if (auth === undefined) {
-    authInfo = { code: 1001, message: 'User authentication info not found' };
-  } else if (password && auth.password !== password) {
-    authInfo = { code: 1002, message: 'Password do not match' };
-  } else {
-    user = users.find((user) => user.login === auth.login);
-    if (!user) {
-      authInfo = { code: 1003, message: 'User not found' };
+  AuthInfo.findOne({ where: {[idProperty]: idPropertyValue}}).then(auth => {
+    if (!auth) {
+      done(null, false, { code: 1001, message: 'User authentication info not found' });
+    } else if (password && auth.password !== password) {
+      done(null, false, { code: 1002, message: 'Password do not match' });
+    } else {
+      User.findOne({ where: {login: auth.login}}).then(user => {
+        if (!user) {
+          done(null, false, { code: 1003, message: 'User not found' });
+        } else {
+          done(null, user.get(), null);
+        }
+      });
     }
-  }
-
-  done(null, user, authInfo);
+  });
 }
 
 function localAuthStrategyHandler() {
