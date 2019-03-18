@@ -4,7 +4,7 @@ import LocalStrategy from "passport-local"
 import TwitterStrategy from "passport-twitter"
 import FacebookStrategy from "passport-facebook"
 import GoogleStrategy from "passport-google-oauth20"
-import secretStorage from "./../models/secretStorage"
+import secretStorage, {twitterCredentials, facebookCredentials, googleCredentials} from "./../models/secretStorage"
 import db from "./../models/storage"
 import jwt from "jsonwebtoken"
 
@@ -58,17 +58,17 @@ passport.use(new LocalStrategy(
 ));
 
 passport.use(new TwitterStrategy(
-  buildOAuthStrategyOptions(secretStorage.TWITTER_CONSUMER_KEY, secretStorage.TWITTER_CONSUMER_SECRET, "/twitter/callback"),
+  buildOAuthStrategyOptions(twitterCredentials.CONSUMER_KEY, twitterCredentials.CONSUMER_SECRET, "/twitter/callback"),
   oauthStrategyHandler('twitterProfileId')
 ));
 
 passport.use(new FacebookStrategy(
-  buildOAuthStrategyOptions(secretStorage.FACEBOOK_APP_ID, secretStorage.FACEBOOK_APP_SECRET, "/facebook/callback"),
+  buildOAuthStrategyOptions(facebookCredentials.APP_ID, facebookCredentials.APP_SECRET, "/facebook/callback"),
   oauthStrategyHandler('facebookProfileId')
 ));
 
 passport.use(new GoogleStrategy(
-  buildOAuthStrategyOptions(secretStorage.GOOGLE_CLIENT_ID, secretStorage.GOOGLE_CLIENT_SECRET, "/google/callback"),
+  buildOAuthStrategyOptions(googleCredentials.CLIENT_ID, googleCredentials.CLIENT_SECRET, "/google/callback"),
   oauthStrategyHandler('googleProfileId')
 ));
 
