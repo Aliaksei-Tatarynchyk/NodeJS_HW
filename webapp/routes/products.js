@@ -1,6 +1,9 @@
 import express from "express"
-import { products, reviews } from "./../models/storage"
+import db from "./../models/storage"
 import checkAuthToken from "./../middlewares/checkAuthToken"
+
+const Product = db.import("./../models/product");
+const Review = db.import("./../models/review");
 
 const router = express.Router();
 
@@ -8,12 +11,15 @@ router.use(checkAuthToken);
 
 router.route('/')
   .get((req, res) => {
-    res.json(products);
+    Product.findAll().then(products => {
+      res.json(products);
+    });
   })
   .post((req, res) => {
     let product = req.body;
-    products.push(product);
-    res.json(product);
+    Product.create(product).then(() => {
+      res.json(product);
+    });
   });
 
 router.get('/:productId', (req, res) => {
@@ -24,12 +30,15 @@ router.get('/:productId', (req, res) => {
   // console.time('array'); // array approach is approximately 3 times faster than lodash (0.03ms vs 0.87ms for ~7k records)
   // products.find((item) => item.id === req.params.id);
   // console.timeEnd('array');
-
-  res.json(products.find((product) => product.id === req.params.productId));
+  Product.findByPk(req.params.productId).then(product => {
+    res.json(product.get());
+  })
 });
 
 router.get('/:productId/reviews', (req, res) => {
-  res.json(reviews.filter((review) => review.productId === req.params.productId));
+  Review.findAll({where: {productId: req.params.productId}}).then(reviews => {
+    res.json(reviews);
+  });
 });
 
 export default router;
