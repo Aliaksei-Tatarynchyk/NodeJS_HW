@@ -5,7 +5,7 @@ import TwitterStrategy from "passport-twitter"
 import FacebookStrategy from "passport-facebook"
 import GoogleStrategy from "passport-google-oauth20"
 import secretStorage, {twitterCredentials, facebookCredentials, googleCredentials} from "./../models/secretStorage"
-import db from "./../models/storage"
+import db from "./../models"
 import jwt from "jsonwebtoken"
 
 const AuthInfo = db.import("./../models/authinfo");
