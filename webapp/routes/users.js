@@ -1,5 +1,5 @@
 import express from "express"
-import db from "./../models/storage"
+import db from "./../models"
 import checkAuthToken from "./../middlewares/checkAuthToken"
 
 const User = db.import("./../models/user");
