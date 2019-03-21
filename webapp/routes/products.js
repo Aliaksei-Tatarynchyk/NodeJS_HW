@@ -1,9 +1,9 @@
 import express from "express"
-import db from "./../models"
+import db from "./../models/sequelize"
 import checkAuthToken from "./../middlewares/checkAuthToken"
 
-const Product = db.import("./../models/product");
-const Review = db.import("./../models/review");
+const Product = db.import("./../models/sequelize/product");
+const Review = db.import("./../models/sequelize/review");
 
 const router = express.Router();
 
