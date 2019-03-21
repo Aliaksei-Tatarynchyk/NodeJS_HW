@@ -5,11 +5,11 @@ import TwitterStrategy from "passport-twitter"
 import FacebookStrategy from "passport-facebook"
 import GoogleStrategy from "passport-google-oauth20"
 import secretStorage, {twitterCredentials, facebookCredentials, googleCredentials} from "./../models/secretStorage"
-import db from "./../models"
+import db from "./../models/sequelize"
 import jwt from "jsonwebtoken"
 
-const AuthInfo = db.import("./../models/authinfo");
-const User = db.import("./../models/user");
+const AuthInfo = db.import("./../models/sequelize/authinfo");
+const User = db.import("./../models/sequelize/user");
 
 const router = express.Router();
 
