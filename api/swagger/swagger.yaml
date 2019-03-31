@@ -1,0 +1,313 @@
+swagger: '2.0'
+info:
+  description: NodeJS HW server using swagger
+  version: 1.0.0
+  title: NodeJSHW
+  contact:
+    email: aliaksei_tatarynchyk@epam.com
+host: localhost:8095
+basePath: /api
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: product
+  description: Everything about products
+- name: user
+  description: Everything about users
+- name: city
+  description: Everything about cities
+paths:
+  /swagger:
+    x-swagger-pipe: swagger_raw
+  /products:
+    x-swagger-router-controller: products
+    get:
+      tags:
+      - product
+      summary: Return ALL products
+      description: Return ALL products
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+    post:
+      tags:
+      - product
+      summary: Add new product and return it
+      description: Add new product and return it
+      consumes:
+      - application/json
+      produces: 
+      - application/json
+      parameters: 
+      - name: product
+        in: body
+        description: Product object that needs to be added
+        required: true
+        schema:
+          $ref: '#/definitions/Product'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+  /products/{productId}:
+    x-swagger-router-controller: products
+    get:
+      tags: 
+      - product
+      summary: Return single product by id
+      description: Return single product by id
+      operationId: getProductById
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product that needs to be returned
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+    delete:
+      tags:
+      - product
+      summary: Deletes single product
+      description: Deletes single product
+      operationId: deleteProductById
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product that should be deleted
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+  /products/{productId}/reviews:
+    get:
+      tags: 
+      - product
+      summary: Return all reviews for single product
+      description: Return all reviews for single product
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product for that reviews should be returned
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+  /users:
+    x-swagger-router-controller: users
+    get:
+      tags:
+      - user
+      summary: Return all users
+      description: Return all users
+      produces: 
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  /users/{login}:
+    x-swagger-router-controller: users
+    delete:
+      tags:
+      - user
+      summary: Delete single user
+      description: Delete single user
+      operationId: deleteUserByLogin
+      produces:
+      - application/json
+      parameters:
+      - name: login
+        in: path
+        description: Login of user that should be deleted
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+  /cities:
+    x-swagger-router-controller: cities 
+    get:
+      tags:
+      - city
+      summary: Return all cities
+      description: Return all cities
+      produces: 
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+    post:
+      tags:
+      - city
+      summary: Add new city and returns it
+      description: Add new city and returns it
+      consumes: 
+      - application/json
+      produces: 
+      - application/json
+      parameters: 
+      - name: city
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/City'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/City'
+  /cities/random:
+    x-swagger-router-controller: cities
+    get:
+      tags:
+      - city
+      summary: Return one random city
+      description: Return one random city
+      operationId: getRandomCity
+      produces: 
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/City'
+  /cities/{cityName}:
+    x-swagger-router-controller: cities
+    put:
+      tags:
+      - city
+      summary: Updates SINGLE city by id if exists or adds NEW city with the given id otherwise
+      description: Updates SINGLE city by id if exists or adds NEW city with the given id otherwise
+      operationId: updateCityByName
+      produces:
+      - application/json
+      parameters:
+      - name: cityName
+        in: path
+        description: name of the city to update
+        required: true
+        type: string
+      - name: city
+        in: body
+        description: city object
+        required: true
+        schema:
+          $ref: '#/definitions/City'
+      responses:
+        200:
+          description: OK
+    delete:
+      tags:
+      - city
+      summary: Deletes single city
+      description: Deletes single city
+      operationId: deleteCityByName
+      produces:
+      - application/json
+      parameters:
+      - name: cityName
+        in: path
+        description: name of the city to delete
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        example: prd00556
+      displayName:
+        type: string
+        example: Macadamia Oil
+      price:
+        type: number
+        example: 99.99
+  Review:
+    type: object
+    properties:
+      author:
+        type: string
+        example: Anna
+      productId:
+        type: string
+        example: prd00556
+      review:
+        type: string
+        example: It''s a very cool oil, I like it so much so I want to buy it more and more. The only thing that upset me is the price - it''s quite expensive...
+  User:
+    type: object
+    properties:
+      login:
+        type: string
+        example: anon
+      firstName:
+        type: string
+        example: Anonymous
+      lastName:
+        type: string
+        example: Pupkin
+      email:
+        type: string
+        format: /.*?@.*?\..*?/
+        example: anon@zoo.com
+  City:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Brest
+      country:
+        type: string
+        example: Belarus
+      capital:
+        type: boolean
+        default: false
+        example: true
+      location:
+        type: object
+        properties:
+          lat:
+            type: number
+            example: 52.097621
+          long:
+            type: number
+            example: 23.734051
