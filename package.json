@@ -2,7 +2,7 @@
   "name": "nodejs-hw-atata",
   "version": "1.0.0",
   "description": "This application shows message \"I'm running\". It's a HW1 for NodeJS mentoring program.",
-  "main": "src/app.js",
+  "main": "app-swagger.js",
   "scripts": {
     "test": "jest --passWithNoTests",
     "build": "babel src -d build",
@@ -14,6 +14,8 @@
     "webapp": "nodemon --exec babel-node -- ./webapp/index.js",
     "db-update": "npx sequelize db:migrate && npx sequelize db:seed:all",
     "db-undo": "npx sequelize db:seed:undo:all && npx sequelize db:migrate:undo:all",
+    "hw8": "nodemon --exec babel-node -- ./app-swagger.js",
+    "hw8-edit": "swagger project edit",
     "start-another-way": "nodemon --exec npx babel src/app.js",
     "start-another-way-2": "npm run build && nodemon ./build/app.js",
     "start-another-way-3": "nodemon --watch src --exec \"npm run build && node ./build/app.js\""
@@ -54,6 +56,8 @@
     "passport-twitter": "^1.0.4",
     "pg": "^7.9.0",
     "sequelize": "^5.1.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "swagger": "^0.7.5",
+    "swagger-express-mw": "^0.1.0"
   }
 }
